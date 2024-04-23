@@ -30,6 +30,11 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
 # Android
+
+## Graphics
+androidx-graphics-shapes = "androidx.graphics:graphics-shapes:1.0.0-alpha05"
+
+## AGP
 android-agp-application = { module = "com.android.library:com.android.library.gradle.plugin", version.ref = "agp" }
 
 [plugins]
