@@ -3,7 +3,13 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.library.navigation)
     implementation(projects.library.uikit)
+
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.autoservice.annotations)
+    ksp(libs.autoservice.ksp)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

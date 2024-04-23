@@ -11,6 +11,7 @@ class ComposeTargetPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.plugins.apply("com.android.application")
         target.plugins.apply("org.jetbrains.kotlin.android")
+        target.plugins.apply("com.google.devtools.ksp")
         GenericAndroidMixin.apply(target)
 
         target.extensions.configure<ApplicationExtension> {
