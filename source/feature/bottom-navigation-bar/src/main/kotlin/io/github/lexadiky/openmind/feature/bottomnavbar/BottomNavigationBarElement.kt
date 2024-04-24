@@ -5,29 +5,20 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
-import io.github.lexadiky.openmind.library.arc.socket.Socket
+import io.github.lexadiky.openmind.library.arc.di.createViewModelSocket
 
 @Composable
-fun BottomNavigationBarFragment() {
-    val socket = rememberBottomNavigationBarFragmentSocket()
-    BottomNavigationBarFragmentImpl(socket.state.value, socket::act)
+fun BottomNavigationBarElement() {
+    val socket = BottomNavigationBarComponent.Factory.createViewModelSocket(Unit)
+    val state by socket.state.collectAsState()
+    BottomNavigationBarElementImpl(state, socket::act)
 }
 
 @Composable
-private fun rememberBottomNavigationBarFragmentSocket() : Socket<BottomNavigationBarState, BottomNavigationBarAction> {
-    return viewModel {
-        Socket.ui(
-            defaultState = BottomNavigationBarState(),
-            reducer = BottomNavigationBarReducer(),
-            commandHandlers = emptyList()
-        )
-    }
-}
-
-@Composable
-private fun BottomNavigationBarFragmentImpl(
+private fun BottomNavigationBarElementImpl(
     state: BottomNavigationBarState,
     act: (BottomNavigationBarAction) -> Unit
 ) {
@@ -35,7 +26,7 @@ private fun BottomNavigationBarFragmentImpl(
         state.items.forEach { item ->
             NavigationBarItem(
                 selected = item == state.selectedItem,
-                onClick = { },
+                onClick = { act(BottomNavigationBarAction.ItemClicked(item)) },
                 icon = { Icon(item.icon, stringResource(id = item.label)) },
                 label = { Text(text = stringResource(id = item.label)) }
             )

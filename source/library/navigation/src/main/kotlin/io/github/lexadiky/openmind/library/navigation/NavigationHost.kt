@@ -1,32 +1,25 @@
 package io.github.lexadiky.openmind.library.navigation
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import io.github.lexadiky.openmind.library.arc.di.createViewModelSocket
 import kotlin.reflect.KType
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.serializer
 
 @Composable
-fun NavigationHost() {
+fun NavigationHost(controller: NavHostController) {
     val destinations by rememberDestinationList()
-    val controller = rememberNavController()
-
     if (!destinations.isNullOrEmpty()) {
-        NavHost(navController = controller, startDestination = "/") {
+        NavHost(navController = controller, startDestination = Navigator.DEFAULT_ROUTE) {
             NavigatorComponentHolder.init(
                 NavigatorComponent.from(controller)
             )

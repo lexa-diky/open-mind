@@ -11,10 +11,11 @@ import io.github.lexadiky.openmind.feature.bottomnavigationbar.R
 
 internal enum class BottomNavigationBarItem(
     val icon: ImageVector,
+    val route: String,
     @StringRes val label: Int
 ) {
-    Me(Icons.Default.Face, R.string.feature_bottom_navigation_bar_item_me),
-    Calendar(Icons.Default.DateRange, R.string.feature_bottom_navigation_bar_item_calendar),
-    Analyze(Icons.Default.Search, R.string.feature_bottom_navigation_bar_item_analyze),
-    Settings(Icons.Default.Settings, R.string.feature_bottom_navigation_bar_item_settings)
+    Me(Icons.Default.Face, "/me", R.string.feature_bottom_navigation_bar_item_me),
+    Calendar(Icons.Default.DateRange, "/calendar", R.string.feature_bottom_navigation_bar_item_calendar),
+    Analyze(Icons.Default.Search, "/analyze", R.string.feature_bottom_navigation_bar_item_analyze),
+    Settings(Icons.Default.Settings, "/settings", R.string.feature_bottom_navigation_bar_item_settings)
 }
