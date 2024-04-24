@@ -5,19 +5,22 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.navigation.NavHostController
+import io.github.lexadiky.openmind.library.navigation.notfound.Destination404
 import java.util.ServiceLoader
-import kotlinx.coroutines.delay
 
 @Composable
-fun rememberDestinationList(): State<List<Destination>?> {
+@Suppress("UNCHECKED_CAST")
+fun rememberDestinationList(): State<List<AnyComposeDestination>?> {
     val state = remember {
-        mutableStateOf(emptyList<Destination>())
+        mutableStateOf(emptyList<ComposeDestination<Any, Any, Any>>())
     }
 
     LaunchedEffect(Unit) {
-        state.value = ServiceLoader.load(Destination::class.java)
-            .toList()
+        val composeDestinations = ServiceLoader.load(ComposeDestination::class.java)
+            .toList() as List<AnyComposeDestination>
+        val destination404 = Destination404() as AnyComposeDestination
+
+        state.value = composeDestinations + destination404
     }
 
     return state

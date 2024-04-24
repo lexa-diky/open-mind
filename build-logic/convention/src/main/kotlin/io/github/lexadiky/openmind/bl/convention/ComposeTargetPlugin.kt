@@ -12,6 +12,7 @@ class ComposeTargetPlugin : Plugin<Project> {
         target.plugins.apply("com.android.application")
         target.plugins.apply("org.jetbrains.kotlin.android")
         target.plugins.apply("com.google.devtools.ksp")
+        target.plugins.apply("org.jetbrains.kotlin.plugin.serialization")
         GenericAndroidMixin.apply(target)
 
         target.extensions.configure<ApplicationExtension> {

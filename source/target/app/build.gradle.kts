@@ -3,8 +3,14 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.feature.settings)
+    implementation(projects.feature.bottomNavigationBar)
+
     implementation(projects.library.navigation)
     implementation(projects.library.uikit)
+    implementation(projects.library.arc)
+
+    implementation(libs.kotlin.serialization)
 
     implementation(libs.androidx.navigation.compose)
 

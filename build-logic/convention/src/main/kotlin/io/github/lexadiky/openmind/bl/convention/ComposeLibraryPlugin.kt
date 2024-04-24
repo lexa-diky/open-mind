@@ -15,6 +15,7 @@ class ComposeLibraryPlugin : Plugin<Project> {
         target.plugins.apply("com.android.library")
         target.plugins.apply("org.jetbrains.kotlin.android")
         target.plugins.apply("com.google.devtools.ksp")
+        target.plugins.apply("org.jetbrains.kotlin.plugin.serialization")
         GenericAndroidMixin.apply(target)
     }
 }

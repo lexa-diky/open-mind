@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="feature_bottom_navigation_bar_item_me">Me</string>
+    <string name="feature_bottom_navigation_bar_item_calendar">Calendar</string>
+    <string name="feature_bottom_navigation_bar_item_analyze">Analyze</string>
+    <string name="feature_bottom_navigation_bar_item_settings">Settings</string>
+
+</resources>

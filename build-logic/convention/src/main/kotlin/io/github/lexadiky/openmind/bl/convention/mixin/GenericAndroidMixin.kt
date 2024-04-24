@@ -8,7 +8,9 @@ object GenericAndroidMixin {
 
     fun apply(target: Project) {
         target.extensions.android.apply {
-            namespace = "io.github.lexadiky.openmind"
+            val namespacePostfix = target.path.replace(":", ".")
+                .replace("-", "")
+            namespace = "io.github.lexadiky.openmind$namespacePostfix"
             compileSdk = 34
 
             defaultConfig {

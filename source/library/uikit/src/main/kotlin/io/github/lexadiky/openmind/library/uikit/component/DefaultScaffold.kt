@@ -7,10 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun DefaultScaffold(content: @Composable () -> Unit) {
+fun DefaultScaffold(
+    bottomBar: @Composable () -> Unit = {},
+    content: @Composable () -> Unit
+) {
     Scaffold(
         bottomBar = {
-            DefaultNavigationBar()
+            bottomBar()
         },
         content = { padding ->
             Box(modifier = Modifier.padding(padding)) {
