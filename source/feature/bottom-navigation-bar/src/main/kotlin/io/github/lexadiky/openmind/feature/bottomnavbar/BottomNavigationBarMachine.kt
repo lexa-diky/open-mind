@@ -1,8 +1,26 @@
 package io.github.lexadiky.openmind.feature.bottomnavbar
 
+import io.github.lexadiky.openmind.feature.bottomnavbar.entity.BottomNavigationBarItem
 import io.github.lexadiky.openmind.library.arc.Reducer
 import io.github.lexadiky.openmind.library.arc.command
 import io.github.lexadiky.openmind.library.arc.state
+
+internal data class BottomNavigationBarState(
+    val items: List<BottomNavigationBarItem> = BottomNavigationBarItem.entries,
+    val selectedItem: BottomNavigationBarItem = BottomNavigationBarItem.Me
+)
+
+internal sealed interface BottomNavigationBarCommand {
+
+    class Navigate(val item: BottomNavigationBarItem) : BottomNavigationBarCommand
+    data object ListenToCurrentRoute : BottomNavigationBarCommand
+}
+
+internal sealed interface BottomNavigationBarAction {
+
+    class ItemClicked(val item: BottomNavigationBarItem): BottomNavigationBarAction
+    class Navigated(val item: BottomNavigationBarItem): BottomNavigationBarAction
+}
 
 internal class BottomNavigationBarReducer : Reducer<BottomNavigationBarState, BottomNavigationBarAction, BottomNavigationBarCommand> {
 

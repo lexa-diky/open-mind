@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="feature_settings_title">Settings</string>
+
+    <string name="feature_settings_item_theme_title">Theme</string>
+    <string name="feature_settings_item_theme_explain">Make application look just as you like it</string>
+
+    <string name="feature_settings_item_backup_title">Backup</string>
+    <string name="feature_settings_item_backup_explain">Don\'t loose your records</string>
+
+    <string name="feature_settings_item_share_title">Share Application</string>
+    <string name="feature_settings_item_share_explain">Spread the love ❤️</string>
+
+
+</resources>

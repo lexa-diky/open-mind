@@ -12,7 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.auto.service.AutoService
 import io.github.lexadiky.openmind.feature.bottomnavbar.BottomNavigationBarElement
 import io.github.lexadiky.openmind.library.arc.socket.Socket
-import io.github.lexadiky.openmind.library.navigation.ComposeDestination
+import io.github.lexadiky.openmind.library.navigation.desitnation.ComposeScreenDestination
 import io.github.lexadiky.openmind.library.navigation.NavigationHost
 import io.github.lexadiky.openmind.library.navigation.Navigator
 import io.github.lexadiky.openmind.library.navigation.NavigatorComponent
@@ -45,8 +45,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@AutoService(ComposeDestination::class)
-class RootDestination : ComposeDestination<Unit, Unit, Unit> {
+@AutoService(ComposeScreenDestination::class)
+class RootScreenDestination : ComposeScreenDestination<Unit, Unit, Unit> {
     override val route: String = Navigator.DEFAULT_ROUTE
 
     @Composable

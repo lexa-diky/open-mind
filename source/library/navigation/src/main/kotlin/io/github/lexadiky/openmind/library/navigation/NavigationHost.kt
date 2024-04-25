@@ -8,7 +8,11 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import io.github.lexadiky.openmind.library.arc.di.createViewModelSocket
+import io.github.lexadiky.openmind.library.navigation.desitnation.AnyComposeDestination
+import io.github.lexadiky.openmind.library.navigation.desitnation.AnyComposeScreenDestination
+import io.github.lexadiky.openmind.library.navigation.desitnation.ComposeDestination
 import kotlin.reflect.KType
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
@@ -17,26 +21,45 @@ import kotlinx.serialization.serializer
 
 @Composable
 fun NavigationHost(controller: NavHostController) {
-    val destinations by rememberDestinationList()
-    if (!destinations.isNullOrEmpty()) {
+    val screenDestinations by rememberComposeScreenDestinationList()
+    val dialogDestinations by rememberComposeDialogDestinationList()
+
+    if (!screenDestinations.isNullOrEmpty()) {
         NavHost(navController = controller, startDestination = Navigator.DEFAULT_ROUTE) {
             NavigatorComponentHolder.init(
                 NavigatorComponent.from(controller)
             )
 
-            destinations?.forEach { destination ->
+            screenDestinations?.forEach { destination ->
                 composable(
                     destination.route,
                     content = { backStackEntry ->
-                        val arguments = rememberArguments(backStackEntry, destination)
-                        val socket = destination.createViewModelSocket(arguments)
-                        val state by socket.state.collectAsState()
-                        destination.Content(state, socket::act)
+                        RenderComposable(backStackEntry, destination)
+                    }
+                )
+            }
+
+            dialogDestinations?.forEach { destination ->
+                dialog(
+                    destination.route,
+                    content = { backStackEntry ->
+                        RenderComposable(backStackEntry, destination)
                     }
                 )
             }
         }
     }
+}
+
+@Composable
+private fun RenderComposable(
+    backStackEntry: NavBackStackEntry,
+    destination: AnyComposeDestination,
+) {
+    val arguments = rememberArguments(backStackEntry, destination)
+    val socket = destination.createViewModelSocket(arguments)
+    val state by socket.state.collectAsState()
+    destination.Content(state, socket::act)
 }
 
 private val navigationJson = Json { ignoreUnknownKeys = true }
@@ -63,5 +86,5 @@ fun extractFactualArgumentType(destination: AnyComposeDestination): KType {
     val parentClass = destination::class.supertypes.first()
     val superTypeTypeArgument = parentClass.arguments.first()
     return superTypeTypeArgument.type
-        ?: error("parent class does not have type arguemnts")
+        ?: error("parent class does not have type arguments")
 }

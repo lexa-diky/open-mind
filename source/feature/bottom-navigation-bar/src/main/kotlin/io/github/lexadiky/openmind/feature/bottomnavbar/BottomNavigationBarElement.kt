@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import io.github.lexadiky.openmind.library.arc.di.createViewModelSocket
+import io.github.lexadiky.openmind.library.uikit.util.OpenMindPreview
 
 @Composable
 fun BottomNavigationBarElement() {
@@ -32,4 +34,13 @@ private fun BottomNavigationBarElementImpl(
             )
         }
     }
+}
+
+@Composable
+@OpenMindPreview
+fun Preview_BottomNavigationBarElement() {
+    BottomNavigationBarElementImpl(
+        state = BottomNavigationBarState(),
+        act = {}
+    )
 }

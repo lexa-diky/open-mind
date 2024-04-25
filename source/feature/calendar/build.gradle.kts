@@ -3,13 +3,13 @@ plugins {
 }
 
 dependencies {
-    api(projects.library.arc)
-    api(projects.library.uikit)
+    implementation(projects.library.navigation)
+    implementation(projects.library.uikit)
 
-    implementation(libs.kotlin.reflection)
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.kotlin.serialization.json)
+    implementation(libs.kotlin.time)
+
+    compileOnly(libs.autoservice.annotations)
+    ksp(libs.autoservice.ksp)
 
     implementation(libs.androidx.core.ktx)
     implementation(platform(libs.androidx.compose.bom))

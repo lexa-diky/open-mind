@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import io.github.lexadiky.openmind.library.uikit.util.OpenMindPreview
 
 fun Color.brighten(coefficient: Float = 1.2f): Color {
     val modVal = coefficient - 1f
@@ -26,9 +27,8 @@ class CoefficientPreviewParameterProvider : PreviewParameterProvider<Float> {
     override val values = sequenceOf(1.2f, 1.4f, 1.6f, 1.8f)
 }
 
-
-@Preview
 @Composable
+@OpenMindPreview
 private fun Preview_brighten(
     @PreviewParameter(CoefficientPreviewParameterProvider::class) coefficient: Float
 ) {

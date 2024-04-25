@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="library_navigation_404_title">Not Found</string>
+    <string name="library_navigation_404_message">This application page can\'t be found, please file a bug report so development team can help you.</string>
+
+</resources>

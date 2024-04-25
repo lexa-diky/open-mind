@@ -17,3 +17,11 @@ fun <TState, TAction, TCommand> Reducer<TState, TAction, TCommand>.state(block: 
 fun <TState, TAction, TCommand> Reducer<TState, TAction, TCommand>.command(block: () -> TCommand): Reducer.Result<TState, TCommand> {
     return Reducer.Result(commands = listOf(block()))
 }
+
+fun <TState, TAction, TCommand> Reducer<TState, TAction, TCommand>.result(block: () -> Pair<TState, TCommand>): Reducer.Result<TState, TCommand> {
+    val (state, command) = block()
+    return Reducer.Result(
+        state = state,
+        commands = listOf(command)
+    )
+}

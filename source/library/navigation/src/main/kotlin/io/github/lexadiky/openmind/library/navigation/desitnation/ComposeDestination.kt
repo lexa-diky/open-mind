@@ -1,4 +1,4 @@
-package io.github.lexadiky.openmind.library.navigation
+package io.github.lexadiky.openmind.library.navigation.desitnation
 
 import androidx.compose.runtime.Composable
 import io.github.lexadiky.openmind.library.arc.di.SocketComponent

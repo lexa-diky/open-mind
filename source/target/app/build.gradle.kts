@@ -5,6 +5,8 @@ plugins {
 dependencies {
     implementation(projects.feature.settings)
     implementation(projects.feature.bottomNavigationBar)
+    implementation(projects.feature.calendar)
+    implementation(projects.feature.analyze)
 
     implementation(projects.library.navigation)
     implementation(projects.library.uikit)
