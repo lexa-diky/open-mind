@@ -44,22 +44,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@AutoService(ComposeScreenDestination::class)
-class RootScreenDestination : ComposeScreenDestination<Unit, Unit, Unit> {
-    override val route: String = Navigator.DEFAULT_ROUTE
-
-    @Composable
-    override fun Content(state: Unit, act: (Unit) -> Unit) {
-        Text(
-            text = "Hello World",
-            modifier = Modifier.clickable {
-              act(Unit)
-            }
-        )
-    }
-
-    override fun createSocket(arguments: Unit): Socket<Unit, Unit> {
-        return Socket.noop()
-    }
-}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="feature_me_record_sleep_header_icon_content">Sleep, Icon</string>
+    <string name="feature_me_record_sleep_header">Sleep</string>
+    <string name="feature_me_record_sleep_header_time_slept">Time slept last night</string>
+    <string name="feature_me_record_sleep_time_to_bad_icon_content">Time to bed, Icon</string>
+    <string name="feature_me_record_sleep_quality_header">Sleep quality</string>
+    <string name="feature_me_record_sleep_quality_good">Good</string>
+    <string name="feature_me_record_sleep_quality_bad">Bad</string>
+    <string name="feature_me_record_sleep_quality_great">Great</string>
+    <string name="feature_me_record_sleep_quality_awful">Awful</string>
+    <string name="feature_me_record_sleep_quality_ok">OK</string>
+    <string name="feature_me_record_sleep_property_header">How was it?</string>
+
+    <string name="feature_me_record_sleep_property_late">Late bedtime</string>
+    <string name="feature_me_record_sleep_property_early">Early bedtime</string>
+    <string name="feature_me_record_sleep_property_nightmare">Nightmare</string>
+    <string name="feature_me_record_sleep_property_insomnia">Insomnia</string>
+    <string name="feature_me_record_sleep_property_woke_early">Woke early</string>
+    <string name="feature_me_record_sleep_property_overslept">Woke late</string>
+    <string name="feature_me_record_sleep_property_refreshed">Refreshing</string>
+    <string name="feature_me_record_sleep_property_tired">Woke tired</string>
+    <string name="feature_me_record_sleep_note_label">Note</string>
+
+    <string-array name="feature_me_record_sleep_property_list">
+        <item>@string/feature_me_record_sleep_property_late</item>
+        <item>@string/feature_me_record_sleep_property_early</item>
+        <item>@string/feature_me_record_sleep_property_nightmare</item>
+        <item>@string/feature_me_record_sleep_property_insomnia</item>
+        <item>@string/feature_me_record_sleep_property_woke_early</item>
+        <item>@string/feature_me_record_sleep_property_overslept</item>
+        <item>@string/feature_me_record_sleep_property_refreshed</item>
+        <item>@string/feature_me_record_sleep_property_tired</item>
+    </string-array>
+
+</resources>

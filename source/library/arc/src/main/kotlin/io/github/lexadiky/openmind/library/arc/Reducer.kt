@@ -10,12 +10,16 @@ fun interface Reducer<TState, TAction, TCommand> {
     )
 }
 
+fun <TState, TAction, TCommand> Reducer<TState, TAction, TCommand>.ignore(): Reducer.Result<TState, TCommand> {
+    return Reducer.Result()
+}
+
 fun <TState, TAction, TCommand> Reducer<TState, TAction, TCommand>.state(block: () -> TState): Reducer.Result<TState, TCommand> {
     return Reducer.Result(state = block())
 }
 
-fun <TState, TAction, TCommand> Reducer<TState, TAction, TCommand>.command(block: () -> TCommand): Reducer.Result<TState, TCommand> {
-    return Reducer.Result(commands = listOf(block()))
+fun <TState, TAction, TCommand> Reducer<TState, TAction, TCommand>.command(block: () -> TCommand?): Reducer.Result<TState, TCommand> {
+    return Reducer.Result(commands = listOfNotNull(block()))
 }
 
 fun <TState, TAction, TCommand> Reducer<TState, TAction, TCommand>.result(block: () -> Pair<TState, TCommand>): Reducer.Result<TState, TCommand> {

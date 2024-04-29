@@ -1,23 +1,16 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package io.github.lexadiky.openmind.feature.analyze
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.google.auto.service.AutoService
-import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
-import com.patrykandpatrick.vico.compose.cartesian.axis.rememberBottomAxis
-import com.patrykandpatrick.vico.compose.cartesian.axis.rememberStartAxis
-import com.patrykandpatrick.vico.compose.cartesian.layer.rememberLineCartesianLayer
-import com.patrykandpatrick.vico.compose.cartesian.rememberCartesianChart
-import com.patrykandpatrick.vico.compose.cartesian.rememberVicoScrollState
-import com.patrykandpatrick.vico.core.cartesian.CartesianChart
-import com.patrykandpatrick.vico.core.cartesian.data.CartesianChartModel
-import com.patrykandpatrick.vico.core.cartesian.data.LineCartesianLayerModel
 import io.github.lexadiky.openmind.library.arc.socket.Socket
 import io.github.lexadiky.openmind.library.navigation.desitnation.ComposeScreenDestination
+import io.github.lexadiky.openmind.library.uikit.theme.OpenMindTheme
 import io.github.lexadiky.openmind.library.uikit.util.OpenMindPreview
 
 @AutoService(ComposeScreenDestination::class)
@@ -35,21 +28,22 @@ class AnalyzeScreenDestination : ComposeScreenDestination<Unit, Unit, Unit> {
 
 @Composable
 private fun AnalyzeScreen() {
-    val model = remember {
-        CartesianChartModel(LineCartesianLayerModel.build { series(1, 2, 4, 8, 3) })
-    }
-    CartesianChartHost(
-        chart =
-        rememberCartesianChart(
-            rememberLineCartesianLayer(),
-        ),
-        model = model,
-        scrollState = rememberVicoScrollState(),
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = "Analyze") }
+            )
+        },
+        content = { padding ->
+
+        }
     )
 }
 
 @Composable
 @OpenMindPreview
 private fun Preview_AnalyzeScreen() {
-    AnalyzeScreen()
+    OpenMindTheme {
+        AnalyzeScreen()
+    }
 }

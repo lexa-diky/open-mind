@@ -7,6 +7,7 @@ dependencies {
     implementation(projects.feature.bottomNavigationBar)
     implementation(projects.feature.calendar)
     implementation(projects.feature.analyze)
+    implementation(projects.feature.me)
 
     implementation(projects.library.navigation)
     implementation(projects.library.uikit)

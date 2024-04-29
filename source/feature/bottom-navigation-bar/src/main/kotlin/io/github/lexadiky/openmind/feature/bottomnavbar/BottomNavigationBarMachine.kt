@@ -31,6 +31,7 @@ internal class BottomNavigationBarReducer : Reducer<BottomNavigationBarState, Bo
         return when (action) {
             is BottomNavigationBarAction.ItemClicked -> command {
                 BottomNavigationBarCommand.Navigate(action.item)
+                    .takeIf { action.item != state.selectedItem }
             }
             is BottomNavigationBarAction.Navigated -> state {
                 state.copy(selectedItem = action.item)

@@ -22,7 +22,7 @@ interface Navigator {
 
     companion object {
 
-        const val DEFAULT_ROUTE = "/"
+        const val DEFAULT_ROUTE = "/me"
         const val NOT_FOUND_ROUTE = ".*"
     }
 }
