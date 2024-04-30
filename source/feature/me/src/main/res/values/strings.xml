@@ -4,6 +4,8 @@
     <string name="feature_me_record_sleep_header_icon_content">Sleep, Icon</string>
     <string name="feature_me_record_sleep_header">Sleep</string>
     <string name="feature_me_record_sleep_header_time_slept">Time slept last night</string>
+    <string name="feature_me_record_sleep_header_time_slept_value">Time slept last night: %s</string>
+    <string name="feature_me_record_sleep_header_time_slept_value_format">%s:%s</string>
     <string name="feature_me_record_sleep_time_to_bad_icon_content">Time to bed, Icon</string>
     <string name="feature_me_record_sleep_quality_header">Sleep quality</string>
     <string name="feature_me_record_sleep_quality_good">Good</string>

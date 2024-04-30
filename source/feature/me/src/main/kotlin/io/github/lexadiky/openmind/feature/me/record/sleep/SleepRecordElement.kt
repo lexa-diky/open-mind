@@ -18,9 +18,9 @@ import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,14 +30,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import io.github.lexadiky.openmind.feature.me.R
 import io.github.lexadiky.openmind.feature.me.ui.MeCard
+import io.github.lexadiky.openmind.library.arc.socket.Socket
+import io.github.lexadiky.openmind.library.uikit.component.Spacer
 import io.github.lexadiky.openmind.library.uikit.theme.OpenMindTheme
 import io.github.lexadiky.openmind.library.uikit.util.OpenMindPreview
+import kotlin.time.Duration.Companion.minutes
 import io.github.lexadiky.openmind.library.uikit.R as UiKitR
 
 @Composable
 fun SleepRecordElement() {
+    val socket = viewModel {
+        Socket.ui(
+            defaultState = SleepRecordState(),
+            reducer = SleepRecordReducer(),
+            commandHandlers = emptyList()
+        )
+    }
+
+    SleepRecordElement(
+        socket.state.collectAsState().value,
+        socket::act
+    )
+}
+
+@Composable
+private fun SleepRecordElement(state: SleepRecordState, act: (SleepRecordAction) -> Unit) {
     MeCard(
         icon = {
             Icon(
@@ -53,19 +73,8 @@ fun SleepRecordElement() {
                 modifier = Modifier
                     .padding(bottom = OpenMindTheme.size.x2)
             ) {
-                val sliderState = remember {
-                    SliderState(
-                        steps = 47,
-                        valueRange = 0f..24f
-                    )
-                }
-                SectionHeader(
-                    text = stringResource(id = R.string.feature_me_record_sleep_header_time_slept),
-                    modifier = Modifier
-                        .padding(horizontal = OpenMindTheme.size.x2)
-                )
-
-                SleepDurationSection(sliderState)
+                SleepTimeHeader(state)
+                SleepDurationSection(state, act)
 
                 SectionHeader(
                     text = stringResource(id = R.string.feature_me_record_sleep_quality_header),
@@ -86,8 +95,29 @@ fun SleepRecordElement() {
                 SleepPropertiesSection()
 
                 NoteSection()
+
+                Spacer(OpenMindTheme.size.x)
             }
         }
+    )
+}
+
+@Composable
+private fun SleepTimeHeader(state: SleepRecordState) {
+    val text = if (state.sleepTime != null) {
+        val durationFormatted = stringResource(
+            id = R.string.feature_me_record_sleep_header_time_slept_value_format,
+            state.sleepTime.inWholeHours,
+            state.sleepTime.inWholeMinutes.mod(60)
+        )
+        stringResource(id = R.string.feature_me_record_sleep_header_time_slept_value, durationFormatted)
+    } else {
+        stringResource(id = R.string.feature_me_record_sleep_header_time_slept)
+    }
+    SectionHeader(
+        text = text,
+        modifier = Modifier
+            .padding(horizontal = OpenMindTheme.size.x2)
     )
 }
 
@@ -169,7 +199,7 @@ private fun SleepQualitySection() {
 }
 
 @Composable
-private fun SleepDurationSection(sliderState: SliderState) {
+private fun SleepDurationSection(state: SleepRecordState, act: (SleepRecordAction) -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround,
@@ -179,7 +209,16 @@ private fun SleepDurationSection(sliderState: SliderState) {
         )
     ) {
         Slider(
-            state = sliderState,
+            value = state.sleepTimeFloat,
+            onValueChange = { newValue ->
+                act(
+                    SleepRecordAction.UpdateSleepTime(
+                        (newValue * 60).toInt().minutes
+                    )
+                )
+            },
+            valueRange = 0f..24f,
+            steps = 47,
             modifier = Modifier.weight(1f)
         )
         IconButton(
